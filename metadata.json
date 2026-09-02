@@ -1,0 +1,6 @@
+{
+  "name": "Awan Medical Store",
+  "description": "Smart Pharmacy Management & Billing System — Professional inventory, POS billing, expiry tracking, purchases, customer ledger, and analytics.",
+  "requestFramePermissions": ["camera"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
