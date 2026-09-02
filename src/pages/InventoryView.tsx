@@ -216,43 +216,45 @@ export const InventoryView: React.FC<InventoryViewProps> = ({ filterMode = 'all'
   };
 
   return (
-    <div className="space-y-6 animate-in fade-in duration-200">
+    <div className="space-y-5 animate-in fade-in duration-200">
       {/* Top Header & Actions */}
-      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between rounded-3xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between rounded-3xl border border-slate-200/80 bg-white p-6 shadow-xs dark:border-slate-800/80 dark:bg-slate-900">
         <div>
-          <div className="flex items-center gap-2">
-            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-emerald-100 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-300 font-bold">
+          <div className="flex items-center gap-3">
+            <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-emerald-50 text-emerald-600 dark:bg-emerald-950/60 dark:text-emerald-400 font-bold shadow-xs">
               <Pill className="h-5 w-5" />
             </div>
-            <h1 className="text-xl font-black text-slate-900 dark:text-white">
-              {filterMode === 'low-stock'
-                ? 'Low Stock Alerts'
-                : filterMode === 'expiring-soon'
-                ? 'Expiring Soon Medicines (<45 Days)'
-                : filterMode === 'expired'
-                ? 'Expired Medicines Quarantine'
-                : filterMode === 'movements'
-                ? 'Stock Audit Trail Movements'
-                : 'Medicine Inventory & Pricing'}
-            </h1>
+            <div>
+              <h1 className="text-xl font-black text-slate-900 dark:text-white">
+                {filterMode === 'low-stock'
+                  ? 'Low Stock Alerts'
+                  : filterMode === 'expiring-soon'
+                  ? 'Expiring Soon Medicines (<45 Days)'
+                  : filterMode === 'expired'
+                  ? 'Expired Medicines Quarantine'
+                  : filterMode === 'movements'
+                  ? 'Stock Audit Trail Movements'
+                  : 'Medicine Inventory & Stock'}
+              </h1>
+              <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
+                Total {filteredMedicines.length} items listed • Batch-level expiry, formula & rack tracking
+              </p>
+            </div>
           </div>
-          <p className="text-xs text-slate-500 mt-1">
-            Total {filteredMedicines.length} items listed • Batch-level expiry and rack tracking
-          </p>
         </div>
 
         <div className="flex flex-wrap items-center gap-2.5">
           <button
             onClick={handleExportCSV}
-            className="flex items-center gap-1.5 rounded-2xl border border-slate-200 bg-slate-50 px-3.5 py-2.5 text-xs font-semibold text-slate-700 hover:bg-slate-100 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-300"
+            className="flex items-center gap-1.5 rounded-2xl border border-slate-200/80 bg-slate-50/70 px-4 py-2.5 text-xs font-bold text-slate-700 hover:bg-slate-100 hover:border-slate-300 transition-all dark:border-slate-700 dark:bg-slate-800 dark:text-slate-300"
           >
-            <Download className="h-4 w-4 text-emerald-600" />
+            <Download className="h-4 w-4 text-emerald-600 dark:text-emerald-400" />
             <span>Export CSV</span>
           </button>
 
           <button
             onClick={() => window.print()}
-            className="flex items-center gap-1.5 rounded-2xl border border-slate-200 bg-slate-50 px-3.5 py-2.5 text-xs font-semibold text-slate-700 hover:bg-slate-100 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-300"
+            className="flex items-center gap-1.5 rounded-2xl border border-slate-200/80 bg-slate-50/70 px-4 py-2.5 text-xs font-bold text-slate-700 hover:bg-slate-100 hover:border-slate-300 transition-all dark:border-slate-700 dark:bg-slate-800 dark:text-slate-300"
           >
             <Printer className="h-4 w-4" />
             <span>Print List</span>
@@ -260,7 +262,7 @@ export const InventoryView: React.FC<InventoryViewProps> = ({ filterMode = 'all'
 
           <button
             onClick={handleOpenAdd}
-            className="flex items-center gap-1.5 rounded-2xl bg-gradient-to-r from-emerald-600 to-teal-600 px-4 py-2.5 text-xs font-bold text-white shadow-md shadow-emerald-600/30 hover:from-emerald-500 hover:to-teal-500 active:scale-95"
+            className="flex items-center gap-1.5 rounded-2xl bg-gradient-to-r from-emerald-600 to-teal-600 px-5 py-2.5 text-xs font-bold text-white shadow-md shadow-emerald-600/25 hover:from-emerald-500 hover:to-teal-500 active:scale-95 transition-all cursor-pointer"
           >
             <Plus className="h-4 w-4" />
             <span>Add Medicine</span>
@@ -269,7 +271,7 @@ export const InventoryView: React.FC<InventoryViewProps> = ({ filterMode = 'all'
       </div>
 
       {/* Filter Bar */}
-      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4 rounded-3xl border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4 rounded-3xl border border-slate-200/80 bg-white p-4 shadow-xs dark:border-slate-800/80 dark:bg-slate-900">
         {/* Search */}
         <div className="relative">
           <Search className="absolute left-3.5 top-3 h-4 w-4 text-slate-400" />
@@ -278,7 +280,7 @@ export const InventoryView: React.FC<InventoryViewProps> = ({ filterMode = 'all'
             value={searchQuery}
             onChange={e => setSearchQuery(e.target.value)}
             placeholder="Search medicine, generic, batch..."
-            className="w-full rounded-2xl border border-slate-200 bg-slate-50 py-2 pl-10 pr-3 text-xs font-semibold text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 dark:border-slate-700 dark:bg-slate-800 dark:text-white"
+            className="w-full rounded-2xl border border-slate-200 bg-slate-50/70 py-2.5 pl-10 pr-3 text-xs font-semibold text-slate-900 placeholder:text-slate-400 focus:border-emerald-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500/10 transition-all dark:border-slate-700 dark:bg-slate-800 dark:text-white"
           />
         </div>
 
@@ -286,7 +288,7 @@ export const InventoryView: React.FC<InventoryViewProps> = ({ filterMode = 'all'
         <select
           value={selectedCategory}
           onChange={e => setSelectedCategory(e.target.value)}
-          className="rounded-2xl border border-slate-200 bg-slate-50 px-3 py-2 text-xs font-semibold text-slate-800 dark:border-slate-700 dark:bg-slate-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-emerald-500"
+          className="rounded-2xl border border-slate-200 bg-slate-50/70 px-3.5 py-2.5 text-xs font-semibold text-slate-800 focus:border-emerald-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500/10 dark:border-slate-700 dark:bg-slate-800 dark:text-white"
         >
           <option value="All">All Categories</option>
           {MEDICINE_CATEGORIES.map(c => (
@@ -298,7 +300,7 @@ export const InventoryView: React.FC<InventoryViewProps> = ({ filterMode = 'all'
         <select
           value={selectedDosageForm}
           onChange={e => setSelectedDosageForm(e.target.value)}
-          className="rounded-2xl border border-slate-200 bg-slate-50 px-3 py-2 text-xs font-semibold text-slate-800 dark:border-slate-700 dark:bg-slate-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-emerald-500"
+          className="rounded-2xl border border-slate-200 bg-slate-50/70 px-3.5 py-2.5 text-xs font-semibold text-slate-800 focus:border-emerald-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500/10 dark:border-slate-700 dark:bg-slate-800 dark:text-white"
         >
           <option value="All">All Dosage Forms</option>
           {DOSAGE_FORMS.map(d => (
@@ -310,7 +312,7 @@ export const InventoryView: React.FC<InventoryViewProps> = ({ filterMode = 'all'
         <select
           value={selectedStatus}
           onChange={e => setSelectedStatus(e.target.value)}
-          className="rounded-2xl border border-slate-200 bg-slate-50 px-3 py-2 text-xs font-semibold text-slate-800 dark:border-slate-700 dark:bg-slate-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-emerald-500"
+          className="rounded-2xl border border-slate-200 bg-slate-50/70 px-3.5 py-2.5 text-xs font-semibold text-slate-800 focus:border-emerald-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500/10 dark:border-slate-700 dark:bg-slate-800 dark:text-white"
         >
           <option value="ALL">All Stock & Expiry Status</option>
           <option value="LOW_STOCK">⚠️ Low Stock Only</option>
@@ -320,11 +322,11 @@ export const InventoryView: React.FC<InventoryViewProps> = ({ filterMode = 'all'
       </div>
 
       {/* Main Medicines Table */}
-      <div className="rounded-3xl border border-slate-200 bg-white shadow-sm overflow-hidden dark:border-slate-800 dark:bg-slate-900">
+      <div className="rounded-3xl border border-slate-200/80 bg-white shadow-xs overflow-hidden dark:border-slate-800/80 dark:bg-slate-900">
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs">
             <thead>
-              <tr className="border-b border-slate-200 bg-slate-50/70 text-slate-500 dark:border-slate-800 dark:bg-slate-800/40">
+              <tr className="border-b border-slate-100 bg-slate-50/70 text-slate-500 dark:border-slate-800 dark:bg-slate-800/40">
                 <th className="py-3.5 px-4 font-bold uppercase tracking-wider text-[10px]">Medicine / Generic</th>
                 <th className="py-3.5 px-3 font-bold uppercase tracking-wider text-[10px]">Category & Form</th>
                 <th className="py-3.5 px-3 font-bold uppercase tracking-wider text-[10px]">Batch & Rack</th>
@@ -338,9 +340,12 @@ export const InventoryView: React.FC<InventoryViewProps> = ({ filterMode = 'all'
             <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
               {filteredMedicines.length === 0 ? (
                 <tr>
-                  <td colSpan={8} className="py-12 text-center text-slate-400">
-                    <Pill className="mx-auto mb-2 h-8 w-8 text-slate-300 dark:text-slate-700" />
-                    <p className="font-bold text-xs text-slate-600 dark:text-slate-300">No medicines found matching criteria</p>
+                  <td colSpan={8} className="py-14 text-center text-slate-400">
+                    <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-slate-100 dark:bg-slate-800 text-slate-400 mx-auto mb-3">
+                      <Pill className="h-6 w-6" />
+                    </div>
+                    <p className="font-bold text-sm text-slate-700 dark:text-slate-200">No medicines match your filter</p>
+                    <p className="text-xs text-slate-500 mt-1">Try resetting filters or adding a new medicine to inventory.</p>
                   </td>
                 </tr>
               ) : (
@@ -352,26 +357,26 @@ export const InventoryView: React.FC<InventoryViewProps> = ({ filterMode = 'all'
                   return (
                     <tr
                       key={med.id}
-                      className="hover:bg-slate-50/70 dark:hover:bg-slate-800/40 transition-colors"
+                      className="hover:bg-slate-50/80 dark:hover:bg-slate-800/40 transition-colors"
                     >
                       {/* Name & Generic */}
                       <td className="py-3.5 px-4">
                         <div className="font-bold text-slate-900 dark:text-white flex items-center gap-1.5">
                           <span>{med.name}</span>
                           {med.requiresPrescription && (
-                            <span className="rounded bg-rose-100 px-1 py-0.2 text-[9px] font-bold text-rose-700 dark:bg-rose-950 dark:text-rose-300">
+                            <span className="rounded-md bg-rose-50 px-1.5 py-0.5 text-[9px] font-bold text-rose-700 dark:bg-rose-950/60 dark:text-rose-300">
                               Rx
                             </span>
                           )}
                         </div>
-                        <div className="text-[11px] text-slate-500 font-sans">
+                        <div className="text-[11px] text-slate-500 font-sans mt-0.5">
                           {med.genericName} • {med.strength}
                         </div>
                       </td>
 
                       {/* Category & Dosage */}
                       <td className="py-3.5 px-3">
-                        <span className="inline-block rounded-lg bg-emerald-50 px-2 py-0.5 text-[10px] font-bold text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300">
+                        <span className="inline-block rounded-lg bg-emerald-50 px-2.5 py-0.5 text-[10px] font-bold text-emerald-700 dark:bg-emerald-950/60 dark:text-emerald-300">
                           {med.category}
                         </span>
                         <div className="text-[10px] text-slate-400 mt-0.5">{med.dosageForm}</div>
@@ -382,14 +387,14 @@ export const InventoryView: React.FC<InventoryViewProps> = ({ filterMode = 'all'
                         <span className="font-mono font-semibold text-slate-700 dark:text-slate-300">
                           {med.batchNumber}
                         </span>
-                        <div className="text-[10px] text-emerald-600 dark:text-emerald-400 font-medium">
+                        <div className="text-[10px] text-emerald-600 dark:text-emerald-400 font-medium mt-0.5">
                           Rack: {med.rackLocation}
                         </div>
                       </td>
 
                       {/* Expiry Date */}
                       <td className="py-3.5 px-3">
-                        <span className={`inline-flex items-center gap-1 rounded-lg px-2 py-0.5 text-[10px] font-bold ${expiry.badgeClass}`}>
+                        <span className={`inline-flex items-center gap-1 rounded-lg px-2.5 py-0.5 text-[10px] font-bold ${expiry.badgeClass}`}>
                           {expiry.status === 'EXPIRED' ? '⛔' : expiry.status === 'CRITICAL' ? '🔥' : '🗓️'}
                           <span>{formatDate(med.expiryDate)}</span>
                         </span>
@@ -401,11 +406,11 @@ export const InventoryView: React.FC<InventoryViewProps> = ({ filterMode = 'all'
                       {/* Current Stock */}
                       <td className="py-3.5 px-3 text-center">
                         <span
-                          className={`inline-block rounded-lg px-2 py-1 font-mono font-black text-xs ${
+                          className={`inline-block rounded-xl px-2.5 py-1 font-mono font-black text-xs ${
                             isOutOfStock
-                              ? 'bg-rose-100 text-rose-700 dark:bg-rose-950 dark:text-rose-300'
+                              ? 'bg-rose-50 text-rose-700 dark:bg-rose-950/60 dark:text-rose-300'
                               : isLowStock
-                              ? 'bg-amber-100 text-amber-800 dark:bg-amber-950 dark:text-amber-300'
+                              ? 'bg-amber-50 text-amber-700 dark:bg-amber-950/60 dark:text-amber-300'
                               : 'bg-slate-100 text-slate-800 dark:bg-slate-800 dark:text-slate-200'
                           }`}
                         >
@@ -420,31 +425,31 @@ export const InventoryView: React.FC<InventoryViewProps> = ({ filterMode = 'all'
                       </td>
 
                       {/* Retail Price */}
-                      <td className="py-3.5 px-3 text-right font-mono font-bold text-emerald-700 dark:text-emerald-400">
+                      <td className="py-3.5 px-3 text-right font-mono font-black text-emerald-600 dark:text-emerald-400">
                         {formatCurrency(med.retailPrice)}
                       </td>
 
                       {/* Actions */}
                       <td className="py-3.5 px-4 text-right">
-                        <div className="flex items-center justify-end gap-1.5">
+                        <div className="flex items-center justify-end gap-1">
                           <button
                             onClick={() => {
                               setAdjustMed(med);
                               setAdjustQuantity(0);
                               setShowAdjustModal(true);
                             }}
-                            className="rounded-lg p-1.5 text-slate-500 hover:bg-slate-100 hover:text-slate-800 dark:hover:bg-slate-800 dark:hover:text-slate-200"
+                            className="rounded-xl p-2 text-slate-500 hover:bg-teal-50 hover:text-teal-600 dark:hover:bg-slate-800 transition-colors"
                             title="Adjust Stock Quantity"
                           >
-                            <Sliders className="h-4 w-4 text-teal-600" />
+                            <Sliders className="h-4 w-4" />
                           </button>
 
                           <button
                             onClick={() => handleOpenEdit(med)}
-                            className="rounded-lg p-1.5 text-slate-500 hover:bg-slate-100 hover:text-slate-800 dark:hover:bg-slate-800 dark:hover:text-slate-200"
+                            className="rounded-xl p-2 text-slate-500 hover:bg-blue-50 hover:text-blue-600 dark:hover:bg-slate-800 transition-colors"
                             title="Edit Medicine"
                           >
-                            <Edit2 className="h-4 w-4 text-blue-600" />
+                            <Edit2 className="h-4 w-4" />
                           </button>
 
                           <button
@@ -453,10 +458,10 @@ export const InventoryView: React.FC<InventoryViewProps> = ({ filterMode = 'all'
                                 deleteMedicine(med.id);
                               }
                             }}
-                            className="rounded-lg p-1.5 text-slate-500 hover:bg-rose-50 hover:text-rose-600 dark:hover:bg-rose-950"
+                            className="rounded-xl p-2 text-slate-500 hover:bg-rose-50 hover:text-rose-600 dark:hover:bg-rose-950 transition-colors"
                             title="Delete Medicine"
                           >
-                            <Trash2 className="h-4 w-4 text-rose-500" />
+                            <Trash2 className="h-4 w-4" />
                           </button>
                         </div>
                       </td>
@@ -471,17 +476,22 @@ export const InventoryView: React.FC<InventoryViewProps> = ({ filterMode = 'all'
 
       {/* Add / Edit Medicine Modal */}
       {showAddModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 p-4 backdrop-blur-sm overflow-y-auto">
-          <div className="relative flex max-h-[90vh] w-full max-w-3xl flex-col rounded-3xl bg-white shadow-2xl dark:bg-slate-900 border border-slate-200 dark:border-slate-800 animate-in fade-in zoom-in-95 duration-150">
-            <div className="flex items-center justify-between border-b border-slate-200 px-6 py-4 dark:border-slate-800">
-              <h3 className="font-bold text-base text-slate-900 dark:text-white">
-                {editingMedicine ? `Edit Medicine: ${editingMedicine.name}` : 'Add New Medicine to Inventory'}
-              </h3>
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 p-4 backdrop-blur-xs overflow-y-auto animate-in fade-in duration-150">
+          <div className="relative flex max-h-[90vh] w-full max-w-3xl flex-col rounded-3xl bg-white shadow-2xl dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
+            <div className="flex items-center justify-between border-b border-slate-100 px-6 py-4.5 dark:border-slate-800">
+              <div className="flex items-center gap-2.5">
+                <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-emerald-50 text-emerald-600 dark:bg-emerald-950/60 dark:text-emerald-400 font-bold">
+                  <Pill className="h-4 w-4" />
+                </div>
+                <h3 className="font-bold text-base text-slate-900 dark:text-white">
+                  {editingMedicine ? `Edit Medicine: ${editingMedicine.name}` : 'Add New Medicine to Inventory'}
+                </h3>
+              </div>
               <button
                 onClick={() => setShowAddModal(false)}
-                className="text-xs text-slate-400 hover:text-slate-600"
+                className="rounded-xl p-1.5 text-slate-400 hover:bg-slate-100 hover:text-slate-600 dark:hover:bg-slate-800 transition-colors"
               >
-                Cancel
+                ✕
               </button>
             </div>
 
@@ -495,7 +505,7 @@ export const InventoryView: React.FC<InventoryViewProps> = ({ filterMode = 'all'
                     value={formData.name}
                     onChange={e => setFormData({ ...formData, name: e.target.value })}
                     placeholder="e.g. Panadol Extra 500mg"
-                    className="w-full rounded-xl border border-slate-300 bg-white px-3 py-2 font-semibold text-slate-900 dark:border-slate-700 dark:bg-slate-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                    className="w-full rounded-2xl border border-slate-200 bg-slate-50/70 px-3.5 py-2.5 font-semibold text-slate-900 focus:border-emerald-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500/10 dark:border-slate-700 dark:bg-slate-800 dark:text-white"
                   />
                 </div>
 
@@ -507,7 +517,7 @@ export const InventoryView: React.FC<InventoryViewProps> = ({ filterMode = 'all'
                     value={formData.genericName}
                     onChange={e => setFormData({ ...formData, genericName: e.target.value })}
                     placeholder="e.g. Paracetamol + Caffeine"
-                    className="w-full rounded-xl border border-slate-300 bg-white px-3 py-2 font-semibold text-slate-900 dark:border-slate-700 dark:bg-slate-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                    className="w-full rounded-2xl border border-slate-200 bg-slate-50/70 px-3.5 py-2.5 font-semibold text-slate-900 focus:border-emerald-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500/10 dark:border-slate-700 dark:bg-slate-800 dark:text-white"
                   />
                 </div>
               </div>
@@ -518,7 +528,7 @@ export const InventoryView: React.FC<InventoryViewProps> = ({ filterMode = 'all'
                   <select
                     value={formData.category}
                     onChange={e => setFormData({ ...formData, category: e.target.value })}
-                    className="w-full rounded-xl border border-slate-300 bg-white px-3 py-2 font-semibold dark:border-slate-700 dark:bg-slate-800 dark:text-white"
+                    className="w-full rounded-2xl border border-slate-200 bg-slate-50/70 px-3.5 py-2.5 font-semibold dark:border-slate-700 dark:bg-slate-800 dark:text-white focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/10"
                   >
                     {MEDICINE_CATEGORIES.map(c => (
                       <option key={c} value={c}>{c}</option>
@@ -531,7 +541,7 @@ export const InventoryView: React.FC<InventoryViewProps> = ({ filterMode = 'all'
                   <select
                     value={formData.dosageForm}
                     onChange={e => setFormData({ ...formData, dosageForm: e.target.value as any })}
-                    className="w-full rounded-xl border border-slate-300 bg-white px-3 py-2 font-semibold dark:border-slate-700 dark:bg-slate-800 dark:text-white"
+                    className="w-full rounded-2xl border border-slate-200 bg-slate-50/70 px-3.5 py-2.5 font-semibold dark:border-slate-700 dark:bg-slate-800 dark:text-white focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/10"
                   >
                     {DOSAGE_FORMS.map(d => (
                       <option key={d} value={d}>{d}</option>
@@ -546,7 +556,7 @@ export const InventoryView: React.FC<InventoryViewProps> = ({ filterMode = 'all'
                     value={formData.strength}
                     onChange={e => setFormData({ ...formData, strength: e.target.value })}
                     placeholder="e.g. 500mg / 5ml"
-                    className="w-full rounded-xl border border-slate-300 bg-white px-3 py-2 font-semibold dark:border-slate-700 dark:bg-slate-800 dark:text-white"
+                    className="w-full rounded-2xl border border-slate-200 bg-slate-50/70 px-3.5 py-2.5 font-semibold dark:border-slate-700 dark:bg-slate-800 dark:text-white focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/10"
                   />
                 </div>
               </div>
@@ -560,7 +570,7 @@ export const InventoryView: React.FC<InventoryViewProps> = ({ filterMode = 'all'
                     value={formData.batchNumber}
                     onChange={e => setFormData({ ...formData, batchNumber: e.target.value })}
                     placeholder="e.g. B-8821"
-                    className="w-full rounded-xl border border-slate-300 bg-white px-3 py-2 font-mono font-bold dark:border-slate-700 dark:bg-slate-800 dark:text-white"
+                    className="w-full rounded-2xl border border-slate-200 bg-slate-50/70 px-3.5 py-2.5 font-mono font-bold dark:border-slate-700 dark:bg-slate-800 dark:text-white focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/10"
                   />
                 </div>
 
@@ -571,7 +581,7 @@ export const InventoryView: React.FC<InventoryViewProps> = ({ filterMode = 'all'
                     required
                     value={formData.expiryDate}
                     onChange={e => setFormData({ ...formData, expiryDate: e.target.value })}
-                    className="w-full rounded-xl border border-slate-300 bg-white px-3 py-2 font-semibold dark:border-slate-700 dark:bg-slate-800 dark:text-white"
+                    className="w-full rounded-2xl border border-slate-200 bg-slate-50/70 px-3.5 py-2.5 font-semibold dark:border-slate-700 dark:bg-slate-800 dark:text-white focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/10"
                   />
                 </div>
 
@@ -582,7 +592,7 @@ export const InventoryView: React.FC<InventoryViewProps> = ({ filterMode = 'all'
                     value={formData.rackLocation}
                     onChange={e => setFormData({ ...formData, rackLocation: e.target.value })}
                     placeholder="e.g. Rack A-1"
-                    className="w-full rounded-xl border border-slate-300 bg-white px-3 py-2 font-semibold dark:border-slate-700 dark:bg-slate-800 dark:text-white"
+                    className="w-full rounded-2xl border border-slate-200 bg-slate-50/70 px-3.5 py-2.5 font-semibold dark:border-slate-700 dark:bg-slate-800 dark:text-white focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/10"
                   />
                 </div>
               </div>
@@ -596,7 +606,7 @@ export const InventoryView: React.FC<InventoryViewProps> = ({ filterMode = 'all'
                     required
                     value={formData.purchasePrice}
                     onChange={e => setFormData({ ...formData, purchasePrice: parseFloat(e.target.value) || 0 })}
-                    className="w-full rounded-xl border border-slate-300 bg-white px-3 py-2 font-mono font-bold dark:border-slate-700 dark:bg-slate-800 dark:text-white"
+                    className="w-full rounded-2xl border border-slate-200 bg-slate-50/70 px-3.5 py-2.5 font-mono font-bold dark:border-slate-700 dark:bg-slate-800 dark:text-white focus:border-emerald-500 focus:outline-none"
                   />
                 </div>
 
@@ -608,7 +618,7 @@ export const InventoryView: React.FC<InventoryViewProps> = ({ filterMode = 'all'
                     required
                     value={formData.retailPrice}
                     onChange={e => setFormData({ ...formData, retailPrice: parseFloat(e.target.value) || 0 })}
-                    className="w-full rounded-xl border border-slate-300 bg-white px-3 py-2 font-mono font-bold text-emerald-700 dark:border-slate-700 dark:bg-slate-800 dark:text-emerald-400"
+                    className="w-full rounded-2xl border border-slate-200 bg-slate-50/70 px-3.5 py-2.5 font-mono font-bold text-emerald-600 dark:border-slate-700 dark:bg-slate-800 dark:text-emerald-400 focus:border-emerald-500 focus:outline-none"
                   />
                 </div>
 
@@ -619,7 +629,7 @@ export const InventoryView: React.FC<InventoryViewProps> = ({ filterMode = 'all'
                     required
                     value={formData.currentStock}
                     onChange={e => setFormData({ ...formData, currentStock: parseInt(e.target.value) || 0 })}
-                    className="w-full rounded-xl border border-slate-300 bg-white px-3 py-2 font-mono font-bold dark:border-slate-700 dark:bg-slate-800 dark:text-white"
+                    className="w-full rounded-2xl border border-slate-200 bg-slate-50/70 px-3.5 py-2.5 font-mono font-bold dark:border-slate-700 dark:bg-slate-800 dark:text-white focus:border-emerald-500 focus:outline-none"
                   />
                 </div>
 
@@ -630,7 +640,7 @@ export const InventoryView: React.FC<InventoryViewProps> = ({ filterMode = 'all'
                     required
                     value={formData.minimumStock}
                     onChange={e => setFormData({ ...formData, minimumStock: parseInt(e.target.value) || 0 })}
-                    className="w-full rounded-xl border border-slate-300 bg-white px-3 py-2 font-mono font-bold dark:border-slate-700 dark:bg-slate-800 dark:text-white"
+                    className="w-full rounded-2xl border border-slate-200 bg-slate-50/70 px-3.5 py-2.5 font-mono font-bold dark:border-slate-700 dark:bg-slate-800 dark:text-white focus:border-emerald-500 focus:outline-none"
                   />
                 </div>
               </div>
@@ -642,7 +652,7 @@ export const InventoryView: React.FC<InventoryViewProps> = ({ filterMode = 'all'
                     type="text"
                     value={formData.barcode}
                     onChange={e => setFormData({ ...formData, barcode: e.target.value })}
-                    className="w-full rounded-xl border border-slate-300 bg-white px-3 py-2 font-mono dark:border-slate-700 dark:bg-slate-800 dark:text-white"
+                    className="w-full rounded-2xl border border-slate-200 bg-slate-50/70 px-3.5 py-2.5 font-mono dark:border-slate-700 dark:bg-slate-800 dark:text-white focus:border-emerald-500 focus:outline-none"
                   />
                 </div>
 
@@ -651,7 +661,7 @@ export const InventoryView: React.FC<InventoryViewProps> = ({ filterMode = 'all'
                   <select
                     value={formData.supplierId}
                     onChange={e => setFormData({ ...formData, supplierId: e.target.value })}
-                    className="w-full rounded-xl border border-slate-300 bg-white px-3 py-2 font-semibold dark:border-slate-700 dark:bg-slate-800 dark:text-white"
+                    className="w-full rounded-2xl border border-slate-200 bg-slate-50/70 px-3.5 py-2.5 font-semibold dark:border-slate-700 dark:bg-slate-800 dark:text-white focus:border-emerald-500 focus:outline-none"
                   >
                     {suppliers.map(s => (
                       <option key={s.id} value={s.id}>{s.companyName} ({s.name})</option>
@@ -673,17 +683,17 @@ export const InventoryView: React.FC<InventoryViewProps> = ({ filterMode = 'all'
                 </label>
               </div>
 
-              <div className="flex justify-end gap-2.5 pt-4 border-t border-slate-200 dark:border-slate-800">
+              <div className="flex justify-end gap-2.5 pt-4 border-t border-slate-100 dark:border-slate-800">
                 <button
                   type="button"
                   onClick={() => setShowAddModal(false)}
-                  className="rounded-xl px-4 py-2.5 text-xs font-semibold text-slate-600 hover:bg-slate-100 dark:hover:bg-slate-800"
+                  className="rounded-2xl px-4 py-2.5 text-xs font-semibold text-slate-600 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="rounded-xl bg-emerald-600 px-6 py-2.5 text-xs font-bold text-white shadow-md hover:bg-emerald-500"
+                  className="rounded-2xl bg-emerald-600 px-6 py-2.5 text-xs font-bold text-white shadow-md shadow-emerald-600/20 hover:bg-emerald-500 transition-colors cursor-pointer"
                 >
                   Save Medicine
                 </button>
@@ -695,20 +705,20 @@ export const InventoryView: React.FC<InventoryViewProps> = ({ filterMode = 'all'
 
       {/* Stock Adjustment Modal */}
       {showAdjustModal && adjustMed && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 p-4 backdrop-blur-sm">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 p-4 backdrop-blur-xs animate-in fade-in duration-150">
           <div className="w-full max-w-md rounded-3xl bg-white p-6 shadow-2xl dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
             <h3 className="font-bold text-base text-slate-900 dark:text-white">Stock Adjustment Audit</h3>
             <p className="text-xs text-slate-500 mt-0.5">{adjustMed.name} (Current: {adjustMed.currentStock} {adjustMed.unit})</p>
 
-            <form onSubmit={handleSaveAdjustment} className="mt-4 space-y-3 text-xs">
+            <form onSubmit={handleSaveAdjustment} className="mt-4 space-y-3.5 text-xs">
               <div>
-                <label className="block font-bold text-slate-700 dark:text-slate-300 mb-1">Adjustment Action</label>
+                <label className="block font-bold text-slate-700 dark:text-slate-300 mb-1.5">Adjustment Action</label>
                 <div className="grid grid-cols-2 gap-2">
                   <button
                     type="button"
                     onClick={() => setAdjustType('ADD')}
-                    className={`rounded-xl py-2 font-bold ${
-                      adjustType === 'ADD' ? 'bg-emerald-600 text-white' : 'bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-300'
+                    className={`rounded-2xl py-2.5 font-bold transition-all ${
+                      adjustType === 'ADD' ? 'bg-emerald-600 text-white shadow-xs' : 'bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-300'
                     }`}
                   >
                     + Increase Stock
@@ -716,8 +726,8 @@ export const InventoryView: React.FC<InventoryViewProps> = ({ filterMode = 'all'
                   <button
                     type="button"
                     onClick={() => setAdjustType('SUBTRACT')}
-                    className={`rounded-xl py-2 font-bold ${
-                      adjustType === 'SUBTRACT' ? 'bg-rose-600 text-white' : 'bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-300'
+                    className={`rounded-2xl py-2.5 font-bold transition-all ${
+                      adjustType === 'SUBTRACT' ? 'bg-rose-600 text-white shadow-xs' : 'bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-300'
                     }`}
                   >
                     - Deduct Stock
@@ -734,7 +744,7 @@ export const InventoryView: React.FC<InventoryViewProps> = ({ filterMode = 'all'
                   value={adjustQuantity || ''}
                   onChange={e => setAdjustQuantity(parseInt(e.target.value) || 0)}
                   placeholder="e.g. 5"
-                  className="w-full rounded-xl border border-slate-300 bg-white px-3 py-2 font-bold text-sm dark:border-slate-700 dark:bg-slate-800 dark:text-white"
+                  className="w-full rounded-2xl border border-slate-200 bg-slate-50/70 px-3.5 py-2 font-bold text-sm dark:border-slate-700 dark:bg-slate-800 dark:text-white focus:border-emerald-500 focus:outline-none"
                 />
               </div>
 
@@ -743,7 +753,7 @@ export const InventoryView: React.FC<InventoryViewProps> = ({ filterMode = 'all'
                 <select
                   value={adjustReason}
                   onChange={e => setAdjustReason(e.target.value)}
-                  className="w-full rounded-xl border border-slate-300 bg-white px-3 py-2 font-semibold dark:border-slate-700 dark:bg-slate-800 dark:text-white"
+                  className="w-full rounded-2xl border border-slate-200 bg-slate-50/70 px-3.5 py-2.5 font-semibold dark:border-slate-700 dark:bg-slate-800 dark:text-white focus:border-emerald-500 focus:outline-none"
                 >
                   <option value="Physical Count Audit">Physical Count Audit</option>
                   <option value="Damaged / Broken Packaging">Damaged / Broken Packaging</option>
@@ -753,17 +763,17 @@ export const InventoryView: React.FC<InventoryViewProps> = ({ filterMode = 'all'
                 </select>
               </div>
 
-              <div className="flex justify-end gap-2 pt-3">
+              <div className="flex justify-end gap-2 pt-3 border-t border-slate-100 dark:border-slate-800">
                 <button
                   type="button"
                   onClick={() => setShowAdjustModal(false)}
-                  className="rounded-xl px-3 py-2 text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800"
+                  className="rounded-2xl px-4 py-2 text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="rounded-xl bg-emerald-600 px-4 py-2 font-bold text-white shadow-md hover:bg-emerald-500"
+                  className="rounded-2xl bg-emerald-600 px-5 py-2 font-bold text-white shadow-sm hover:bg-emerald-500 transition-colors"
                 >
                   Save Adjustment
                 </button>

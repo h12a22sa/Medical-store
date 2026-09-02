@@ -58,34 +58,36 @@ export const SettingsView: React.FC = () => {
   };
 
   return (
-    <div className="space-y-6 animate-in fade-in duration-200">
+    <div className="space-y-5 animate-in fade-in duration-200">
       {/* Header */}
-      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between rounded-3xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between rounded-3xl border border-slate-200/80 bg-white p-6 shadow-xs dark:border-slate-800/80 dark:bg-slate-900">
         <div>
-          <div className="flex items-center gap-2">
-            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-300 font-bold">
+          <div className="flex items-center gap-3">
+            <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-emerald-50 text-emerald-600 dark:bg-emerald-950/60 dark:text-emerald-400 font-bold shadow-xs">
               <SettingsIcon className="h-5 w-5" />
             </div>
-            <h1 className="text-xl font-black text-slate-900 dark:text-white">
-              Store Configuration & System Settings
-            </h1>
+            <div>
+              <h1 className="text-xl font-black text-slate-900 dark:text-white">
+                Store Configuration & System Settings
+              </h1>
+              <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
+                Customize pharmacy identity, billing parameters, thermal printer preferences, and local data backups
+              </p>
+            </div>
           </div>
-          <p className="text-xs text-slate-500 mt-1">
-            Customize pharmacy identity, billing parameters, thermal printer preferences, and local data backups.
-          </p>
         </div>
 
         {saveSuccess && (
-          <div className="flex items-center gap-1.5 rounded-2xl bg-emerald-50 px-4 py-2 text-xs font-bold text-emerald-700 dark:bg-emerald-950 dark:text-emerald-300">
+          <div className="flex items-center gap-1.5 rounded-2xl bg-emerald-50 border border-emerald-200 px-4 py-2 text-xs font-bold text-emerald-700 dark:bg-emerald-950 dark:text-emerald-300">
             <CheckCircle2 className="h-4 w-4" />
             <span>Settings Saved Successfully!</span>
           </div>
         )}
       </div>
 
-      <form onSubmit={handleSave} className="space-y-6 text-xs">
+      <form onSubmit={handleSave} className="space-y-5 text-xs">
         {/* Pharmacy Profile */}
-        <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900 space-y-4">
+        <div className="rounded-3xl border border-slate-200/80 bg-white p-6 shadow-xs dark:border-slate-800/80 dark:bg-slate-900 space-y-4">
           <div className="flex items-center gap-2 border-b border-slate-100 pb-3 dark:border-slate-800">
             <Store className="h-4 w-4 text-emerald-600" />
             <h2 className="font-bold text-sm text-slate-900 dark:text-white">Pharmacy Identity & Header</h2>
@@ -98,7 +100,7 @@ export const SettingsView: React.FC = () => {
                 type="text"
                 value={formSettings.pharmacyName}
                 onChange={e => setFormSettings({ ...formSettings, pharmacyName: e.target.value })}
-                className="w-full rounded-xl border border-slate-300 bg-white px-3 py-2 font-bold dark:border-slate-700 dark:bg-slate-800 dark:text-white"
+                className="w-full rounded-2xl border border-slate-200 bg-slate-50/70 px-3.5 py-2.5 font-bold text-slate-900 dark:border-slate-700 dark:bg-slate-800 dark:text-white focus:border-emerald-500 focus:outline-none"
               />
             </div>
 
@@ -108,7 +110,7 @@ export const SettingsView: React.FC = () => {
                 type="text"
                 value={formSettings.tagline}
                 onChange={e => setFormSettings({ ...formSettings, tagline: e.target.value })}
-                className="w-full rounded-xl border border-slate-300 bg-white px-3 py-2 font-semibold dark:border-slate-700 dark:bg-slate-800 dark:text-white"
+                className="w-full rounded-2xl border border-slate-200 bg-slate-50/70 px-3.5 py-2.5 font-semibold text-slate-900 dark:border-slate-700 dark:bg-slate-800 dark:text-white focus:border-emerald-500 focus:outline-none"
               />
             </div>
 
@@ -118,7 +120,7 @@ export const SettingsView: React.FC = () => {
                 type="text"
                 value={formSettings.phone}
                 onChange={e => setFormSettings({ ...formSettings, phone: e.target.value })}
-                className="w-full rounded-xl border border-slate-300 bg-white px-3 py-2 font-semibold dark:border-slate-700 dark:bg-slate-800 dark:text-white"
+                className="w-full rounded-2xl border border-slate-200 bg-slate-50/70 px-3.5 py-2.5 font-semibold text-slate-900 dark:border-slate-700 dark:bg-slate-800 dark:text-white focus:border-emerald-500 focus:outline-none"
               />
             </div>
 
@@ -128,7 +130,7 @@ export const SettingsView: React.FC = () => {
                 type="text"
                 value={formSettings.licenseNumber}
                 onChange={e => setFormSettings({ ...formSettings, licenseNumber: e.target.value })}
-                className="w-full rounded-xl border border-slate-300 bg-white px-3 py-2 font-mono font-bold dark:border-slate-700 dark:bg-slate-800 dark:text-white"
+                className="w-full rounded-2xl border border-slate-200 bg-slate-50/70 px-3.5 py-2.5 font-mono font-bold text-slate-900 dark:border-slate-700 dark:bg-slate-800 dark:text-white focus:border-emerald-500 focus:outline-none"
               />
             </div>
 
@@ -138,7 +140,7 @@ export const SettingsView: React.FC = () => {
                 type="text"
                 value={formSettings.ntnNumber}
                 onChange={e => setFormSettings({ ...formSettings, ntnNumber: e.target.value })}
-                className="w-full rounded-xl border border-slate-300 bg-white px-3 py-2 font-mono font-bold dark:border-slate-700 dark:bg-slate-800 dark:text-white"
+                className="w-full rounded-2xl border border-slate-200 bg-slate-50/70 px-3.5 py-2.5 font-mono font-bold text-slate-900 dark:border-slate-700 dark:bg-slate-800 dark:text-white focus:border-emerald-500 focus:outline-none"
               />
             </div>
 
@@ -148,7 +150,7 @@ export const SettingsView: React.FC = () => {
                 type="text"
                 value={formSettings.currency}
                 onChange={e => setFormSettings({ ...formSettings, currency: e.target.value })}
-                className="w-full rounded-xl border border-slate-300 bg-white px-3 py-2 font-bold dark:border-slate-700 dark:bg-slate-800 dark:text-white"
+                className="w-full rounded-2xl border border-slate-200 bg-slate-50/70 px-3.5 py-2.5 font-bold text-slate-900 dark:border-slate-700 dark:bg-slate-800 dark:text-white focus:border-emerald-500 focus:outline-none"
               />
             </div>
 
@@ -158,16 +160,16 @@ export const SettingsView: React.FC = () => {
                 type="text"
                 value={formSettings.address}
                 onChange={e => setFormSettings({ ...formSettings, address: e.target.value })}
-                className="w-full rounded-xl border border-slate-300 bg-white px-3 py-2 font-semibold dark:border-slate-700 dark:bg-slate-800 dark:text-white"
+                className="w-full rounded-2xl border border-slate-200 bg-slate-50/70 px-3.5 py-2.5 font-semibold text-slate-900 dark:border-slate-700 dark:bg-slate-800 dark:text-white focus:border-emerald-500 focus:outline-none"
               />
             </div>
           </div>
         </div>
 
         {/* Invoice & Receipts Settings */}
-        <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900 space-y-4">
+        <div className="rounded-3xl border border-slate-200/80 bg-white p-6 shadow-xs dark:border-slate-800/80 dark:bg-slate-900 space-y-4">
           <div className="flex items-center gap-2 border-b border-slate-100 pb-3 dark:border-slate-800">
-            <Printer className="h-4 w-4 text-blue-600" />
+            <Printer className="h-4 w-4 text-emerald-600" />
             <h2 className="font-bold text-sm text-slate-900 dark:text-white">POS Checkout & Thermal Printing Setup</h2>
           </div>
 
@@ -178,7 +180,7 @@ export const SettingsView: React.FC = () => {
                 type="text"
                 value={formSettings.invoiceFooterMessage}
                 onChange={e => setFormSettings({ ...formSettings, invoiceFooterMessage: e.target.value })}
-                className="w-full rounded-xl border border-slate-300 bg-white px-3 py-2 font-semibold dark:border-slate-700 dark:bg-slate-800 dark:text-white"
+                className="w-full rounded-2xl border border-slate-200 bg-slate-50/70 px-3.5 py-2.5 font-semibold text-slate-900 dark:border-slate-700 dark:bg-slate-800 dark:text-white focus:border-emerald-500 focus:outline-none"
               />
             </div>
 
@@ -188,19 +190,19 @@ export const SettingsView: React.FC = () => {
                 type="number"
                 value={formSettings.defaultTaxRate}
                 onChange={e => setFormSettings({ ...formSettings, defaultTaxRate: parseFloat(e.target.value) || 0 })}
-                className="w-full rounded-xl border border-slate-300 bg-white px-3 py-2 font-mono font-bold dark:border-slate-700 dark:bg-slate-800 dark:text-white"
+                className="w-full rounded-2xl border border-slate-200 bg-slate-50/70 px-3.5 py-2.5 font-mono font-bold text-slate-900 dark:border-slate-700 dark:bg-slate-800 dark:text-white focus:border-emerald-500 focus:outline-none"
               />
             </div>
 
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-3 sm:col-span-2 pt-2">
               <input
                 type="checkbox"
                 id="autoPrint"
                 checked={formSettings.autoPrintReceipt}
                 onChange={e => setFormSettings({ ...formSettings, autoPrintReceipt: e.target.checked })}
-                className="h-4 w-4 rounded text-emerald-600 focus:ring-emerald-500"
+                className="h-4 w-4 rounded accent-emerald-600 text-emerald-600 focus:ring-emerald-500 cursor-pointer"
               />
-              <label htmlFor="autoPrint" className="font-bold text-slate-800 dark:text-slate-200">
+              <label htmlFor="autoPrint" className="font-bold text-slate-800 dark:text-slate-200 cursor-pointer">
                 Automatically popup print dialog after checkout completion
               </label>
             </div>
@@ -211,24 +213,24 @@ export const SettingsView: React.FC = () => {
         <div className="flex justify-end">
           <button
             type="submit"
-            className="flex items-center gap-1.5 rounded-2xl bg-emerald-600 px-6 py-3 font-bold text-white shadow-md shadow-emerald-600/30 hover:bg-emerald-500"
+            className="flex items-center gap-2 rounded-2xl bg-emerald-600 px-6 py-3 font-bold text-white shadow-md shadow-emerald-600/20 hover:bg-emerald-500 transition-colors cursor-pointer"
           >
             <Save className="h-4 w-4" />
-            <span>Save All Configuration Changes</span>
+            <span>Save Configuration Changes</span>
           </button>
         </div>
       </form>
 
       {/* Database Backup & Maintenance */}
-      <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900 space-y-4">
+      <div className="rounded-3xl border border-slate-200/80 bg-white p-6 shadow-xs dark:border-slate-800/80 dark:bg-slate-900 space-y-4">
         <div className="flex items-center gap-2 border-b border-slate-100 pb-3 dark:border-slate-800">
-          <Database className="h-4 w-4 text-purple-600" />
+          <Database className="h-4 w-4 text-emerald-600" />
           <h2 className="font-bold text-sm text-slate-900 dark:text-white">Database Backup, Export & Reset</h2>
         </div>
 
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-3 text-xs">
           {/* Export */}
-          <div className="rounded-2xl border border-slate-200 p-4 dark:border-slate-700 space-y-3">
+          <div className="rounded-2xl border border-slate-200/80 bg-slate-50/50 p-4 dark:border-slate-800 dark:bg-slate-800/40 space-y-3">
             <h3 className="font-bold text-slate-900 dark:text-white flex items-center gap-1.5">
               <Download className="h-4 w-4 text-emerald-600" /> Export JSON Backup
             </h3>
@@ -236,26 +238,26 @@ export const SettingsView: React.FC = () => {
             <button
               type="button"
               onClick={exportDataBackup}
-              className="w-full rounded-xl bg-slate-100 py-2 font-bold text-slate-700 hover:bg-slate-200 dark:bg-slate-800 dark:text-slate-300"
+              className="w-full rounded-2xl bg-white border border-slate-200/80 py-2.5 font-bold text-slate-700 hover:bg-slate-50 dark:bg-slate-800 dark:border-slate-700 dark:text-slate-300 transition-colors cursor-pointer shadow-xs"
             >
               Download Backup File
             </button>
           </div>
 
           {/* Import */}
-          <div className="rounded-2xl border border-slate-200 p-4 dark:border-slate-700 space-y-3">
+          <div className="rounded-2xl border border-slate-200/80 bg-slate-50/50 p-4 dark:border-slate-800 dark:bg-slate-800/40 space-y-3">
             <h3 className="font-bold text-slate-900 dark:text-white flex items-center gap-1.5">
-              <Upload className="h-4 w-4 text-blue-600" /> Restore Database
+              <Upload className="h-4 w-4 text-emerald-600" /> Restore Database
             </h3>
             <p className="text-slate-500">Restore your complete store database from an exported backup JSON file.</p>
-            <label className="block w-full cursor-pointer rounded-xl bg-slate-100 py-2 text-center font-bold text-slate-700 hover:bg-slate-200 dark:bg-slate-800 dark:text-slate-300">
+            <label className="block w-full cursor-pointer rounded-2xl bg-white border border-slate-200/80 py-2.5 text-center font-bold text-slate-700 hover:bg-slate-50 dark:bg-slate-800 dark:border-slate-700 dark:text-slate-300 transition-colors shadow-xs">
               Select JSON File
               <input type="file" accept=".json" onChange={handleFileImport} className="hidden" />
             </label>
           </div>
 
           {/* Reset Demo Data */}
-          <div className="rounded-2xl border border-rose-200 bg-rose-50/20 p-4 dark:border-rose-900/40 space-y-3">
+          <div className="rounded-2xl border border-rose-200/80 bg-rose-50/30 p-4 dark:border-rose-900/40 dark:bg-rose-950/20 space-y-3">
             <h3 className="font-bold text-rose-700 dark:text-rose-400 flex items-center gap-1.5">
               <RotateCcw className="h-4 w-4" /> Reset Sample Data
             </h3>
@@ -268,7 +270,7 @@ export const SettingsView: React.FC = () => {
                   alert('Store data reset to default demo dataset!');
                 }
               }}
-              className="w-full rounded-xl bg-rose-600 py-2 font-bold text-white shadow hover:bg-rose-500"
+              className="w-full rounded-2xl bg-rose-600 py-2.5 font-bold text-white shadow-md shadow-rose-600/20 hover:bg-rose-500 transition-colors cursor-pointer"
             >
               Reset to Demo Data
             </button>

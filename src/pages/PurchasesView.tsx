@@ -123,44 +123,46 @@ export const PurchasesView: React.FC = () => {
   };
 
   return (
-    <div className="space-y-6 animate-in fade-in duration-200">
+    <div className="space-y-5 animate-in fade-in duration-200">
       {/* Header */}
-      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between rounded-3xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between rounded-3xl border border-slate-200/80 bg-white p-6 shadow-xs dark:border-slate-800/80 dark:bg-slate-900">
         <div>
-          <div className="flex items-center gap-2">
-            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-indigo-100 text-indigo-700 dark:bg-indigo-950 dark:text-indigo-300 font-bold">
+          <div className="flex items-center gap-3">
+            <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-emerald-50 text-emerald-600 dark:bg-emerald-950/60 dark:text-emerald-400 font-bold shadow-xs">
               <Truck className="h-5 w-5" />
             </div>
-            <h1 className="text-xl font-black text-slate-900 dark:text-white">
-              Purchases & Distributor Inward Stock
-            </h1>
+            <div>
+              <h1 className="text-xl font-black text-slate-900 dark:text-white">
+                Purchases & Inward Stock Entry
+              </h1>
+              <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
+                Record distributor invoices, batch numbers, trade rates & automatic inventory updates
+              </p>
+            </div>
           </div>
-          <p className="text-xs text-slate-500 mt-1">
-            Record fresh medicine stock from distributors, manage batch numbers, and track supplier payables.
-          </p>
         </div>
 
         <div className="flex items-center gap-2">
-          <div className="flex rounded-2xl bg-slate-100 p-1 dark:bg-slate-800">
+          <div className="flex rounded-2xl bg-slate-100/80 p-1 dark:bg-slate-800">
             <button
               onClick={() => setActiveTabMode('history')}
-              className={`rounded-xl px-4 py-2 text-xs font-bold transition-all ${
+              className={`rounded-xl px-4 py-2 text-xs font-bold transition-all cursor-pointer ${
                 activeTabMode === 'history'
-                  ? 'bg-white text-slate-900 shadow-sm dark:bg-slate-700 dark:text-white'
-                  : 'text-slate-600 dark:text-slate-400'
+                  ? 'bg-white text-slate-900 shadow-xs dark:bg-slate-700 dark:text-white'
+                  : 'text-slate-600 hover:text-slate-900 dark:text-slate-400'
               }`}
             >
               Purchase History ({purchases.length})
             </button>
             <button
               onClick={() => setActiveTabMode('new')}
-              className={`rounded-xl px-4 py-2 text-xs font-bold transition-all ${
+              className={`rounded-xl px-4 py-2 text-xs font-bold transition-all cursor-pointer ${
                 activeTabMode === 'new'
-                  ? 'bg-white text-slate-900 shadow-sm dark:bg-slate-700 dark:text-white'
-                  : 'text-slate-600 dark:text-slate-400'
+                  ? 'bg-white text-slate-900 shadow-xs dark:bg-slate-700 dark:text-white'
+                  : 'text-slate-600 hover:text-slate-900 dark:text-slate-400'
               }`}
             >
-              + New Purchase Entry
+              + New Inward Entry
             </button>
           </div>
         </div>
@@ -168,14 +170,14 @@ export const PurchasesView: React.FC = () => {
 
       {activeTabMode === 'new' ? (
         /* New Purchase Form */
-        <form onSubmit={handleSubmitPurchase} className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900 space-y-6 text-xs">
+        <form onSubmit={handleSubmitPurchase} className="rounded-3xl border border-slate-200/80 bg-white p-6 shadow-xs dark:border-slate-800/80 dark:bg-slate-900 space-y-6 text-xs">
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
             <div>
               <label className="block font-bold text-slate-700 dark:text-slate-300 mb-1">Supplier / Distributor *</label>
               <select
                 value={supplierId}
                 onChange={e => setSupplierId(e.target.value)}
-                className="w-full rounded-xl border border-slate-300 bg-white px-3 py-2 font-semibold dark:border-slate-700 dark:bg-slate-800 dark:text-white"
+                className="w-full rounded-2xl border border-slate-200 bg-slate-50/70 px-3.5 py-2.5 font-semibold text-slate-900 focus:border-emerald-500 focus:outline-none dark:border-slate-700 dark:bg-slate-800 dark:text-white"
               >
                 {suppliers.map(s => (
                   <option key={s.id} value={s.id}>
@@ -192,7 +194,7 @@ export const PurchasesView: React.FC = () => {
                 value={supplierInvoiceNo}
                 onChange={e => setSupplierInvoiceNo(e.target.value)}
                 placeholder="e.g. GSK-INV-9921"
-                className="w-full rounded-xl border border-slate-300 bg-white px-3 py-2 font-mono font-bold dark:border-slate-700 dark:bg-slate-800 dark:text-white"
+                className="w-full rounded-2xl border border-slate-200 bg-slate-50/70 px-3.5 py-2.5 font-mono font-bold dark:border-slate-700 dark:bg-slate-800 dark:text-white focus:border-emerald-500 focus:outline-none"
               />
             </div>
 
@@ -202,49 +204,49 @@ export const PurchasesView: React.FC = () => {
                 type="date"
                 value={purchaseDate}
                 onChange={e => setPurchaseDate(e.target.value)}
-                className="w-full rounded-xl border border-slate-300 bg-white px-3 py-2 font-semibold dark:border-slate-700 dark:bg-slate-800 dark:text-white"
+                className="w-full rounded-2xl border border-slate-200 bg-slate-50/70 px-3.5 py-2.5 font-semibold dark:border-slate-700 dark:bg-slate-800 dark:text-white focus:border-emerald-500 focus:outline-none"
               />
             </div>
           </div>
 
           {/* Medicines Entry Table */}
-          <div className="space-y-2">
+          <div className="space-y-3">
             <div className="flex items-center justify-between">
-              <h3 className="font-bold text-sm text-slate-900 dark:text-white flex items-center gap-1.5">
+              <h3 className="font-bold text-sm text-slate-900 dark:text-white flex items-center gap-2">
                 <Boxes className="h-4 w-4 text-emerald-600" />
                 Purchased Medicines Line Items
               </h3>
               <button
                 type="button"
                 onClick={handleAddItemLine}
-                className="rounded-xl bg-emerald-50 px-3 py-1.5 font-bold text-emerald-700 hover:bg-emerald-100 dark:bg-emerald-950 dark:text-emerald-300"
+                className="rounded-2xl bg-emerald-50 px-3.5 py-1.5 font-bold text-emerald-700 hover:bg-emerald-100 dark:bg-emerald-950/60 dark:text-emerald-300 transition-colors cursor-pointer"
               >
                 + Add Item Line
               </button>
             </div>
 
-            <div className="rounded-2xl border border-slate-200 overflow-x-auto dark:border-slate-700">
+            <div className="rounded-2xl border border-slate-200/80 overflow-x-auto dark:border-slate-800">
               <table className="w-full text-left text-xs">
                 <thead>
-                  <tr className="border-b border-slate-200 bg-slate-50 text-slate-600 dark:border-slate-700 dark:bg-slate-800">
-                    <th className="py-2.5 px-3">Medicine</th>
-                    <th className="py-2.5 px-3">Batch Number</th>
-                    <th className="py-2.5 px-3">Expiry Date</th>
-                    <th className="py-2.5 px-3 text-center">Qty (Units)</th>
-                    <th className="py-2.5 px-3 text-right">Cost Price (Rs)</th>
-                    <th className="py-2.5 px-3 text-right">Retail Rate (Rs)</th>
-                    <th className="py-2.5 px-3 text-right">Line Total</th>
-                    <th className="py-2.5 px-3 text-center">Action</th>
+                  <tr className="border-b border-slate-100 bg-slate-50/70 text-slate-500 dark:border-slate-800 dark:bg-slate-800/40">
+                    <th className="py-3 px-3 font-bold uppercase tracking-wider text-[10px]">Medicine</th>
+                    <th className="py-3 px-3 font-bold uppercase tracking-wider text-[10px]">Batch Number</th>
+                    <th className="py-3 px-3 font-bold uppercase tracking-wider text-[10px]">Expiry Date</th>
+                    <th className="py-3 px-3 font-bold uppercase tracking-wider text-[10px] text-center">Qty (Units)</th>
+                    <th className="py-3 px-3 font-bold uppercase tracking-wider text-[10px] text-right">Cost Price (Rs)</th>
+                    <th className="py-3 px-3 font-bold uppercase tracking-wider text-[10px] text-right">Retail Rate (Rs)</th>
+                    <th className="py-3 px-3 font-bold uppercase tracking-wider text-[10px] text-right">Line Total</th>
+                    <th className="py-3 px-3 font-bold uppercase tracking-wider text-[10px] text-center">Action</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
                   {items.map((item, idx) => (
-                    <tr key={idx}>
-                      <td className="py-2 px-3">
+                    <tr key={idx} className="hover:bg-slate-50/60 transition-colors">
+                      <td className="py-2.5 px-3">
                         <select
                           value={item.medicineId}
                           onChange={e => handleUpdateLine(idx, 'medicineId', e.target.value)}
-                          className="w-48 rounded-lg border border-slate-300 bg-white px-2 py-1 font-semibold dark:border-slate-700 dark:bg-slate-800 dark:text-white"
+                          className="w-48 rounded-xl border border-slate-200 bg-slate-50/70 px-2.5 py-1.5 font-semibold text-slate-900 dark:border-slate-700 dark:bg-slate-800 dark:text-white"
                         >
                           {medicines.map(m => (
                             <option key={m.id} value={m.id}>
@@ -253,58 +255,58 @@ export const PurchasesView: React.FC = () => {
                           ))}
                         </select>
                       </td>
-                      <td className="py-2 px-3">
+                      <td className="py-2.5 px-3">
                         <input
                           type="text"
                           value={item.batchNumber}
                           onChange={e => handleUpdateLine(idx, 'batchNumber', e.target.value)}
-                          className="w-24 rounded-lg border border-slate-300 px-2 py-1 font-mono dark:border-slate-700 dark:bg-slate-800 dark:text-white"
+                          className="w-24 rounded-xl border border-slate-200 bg-slate-50/70 px-2.5 py-1.5 font-mono font-semibold dark:border-slate-700 dark:bg-slate-800 dark:text-white"
                         />
                       </td>
-                      <td className="py-2 px-3">
+                      <td className="py-2.5 px-3">
                         <input
                           type="date"
                           value={item.expiryDate}
                           onChange={e => handleUpdateLine(idx, 'expiryDate', e.target.value)}
-                          className="w-32 rounded-lg border border-slate-300 px-2 py-1 dark:border-slate-700 dark:bg-slate-800 dark:text-white"
+                          className="w-32 rounded-xl border border-slate-200 bg-slate-50/70 px-2.5 py-1.5 dark:border-slate-700 dark:bg-slate-800 dark:text-white"
                         />
                       </td>
-                      <td className="py-2 px-3 text-center">
+                      <td className="py-2.5 px-3 text-center">
                         <input
                           type="number"
                           min="1"
                           value={item.quantity}
                           onChange={e => handleUpdateLine(idx, 'quantity', parseInt(e.target.value) || 0)}
-                          className="w-16 rounded-lg border border-slate-300 px-2 py-1 text-center font-bold dark:border-slate-700 dark:bg-slate-800 dark:text-white"
+                          className="w-16 rounded-xl border border-slate-200 bg-slate-50/70 px-2 py-1.5 text-center font-bold dark:border-slate-700 dark:bg-slate-800 dark:text-white"
                         />
                       </td>
-                      <td className="py-2 px-3 text-right">
+                      <td className="py-2.5 px-3 text-right">
                         <input
                           type="number"
                           step="0.01"
                           value={item.purchasePrice}
                           onChange={e => handleUpdateLine(idx, 'purchasePrice', parseFloat(e.target.value) || 0)}
-                          className="w-20 rounded-lg border border-slate-300 px-2 py-1 text-right font-mono font-bold dark:border-slate-700 dark:bg-slate-800 dark:text-white"
+                          className="w-20 rounded-xl border border-slate-200 bg-slate-50/70 px-2 py-1.5 text-right font-mono font-bold dark:border-slate-700 dark:bg-slate-800 dark:text-white"
                         />
                       </td>
-                      <td className="py-2 px-3 text-right">
+                      <td className="py-2.5 px-3 text-right">
                         <input
                           type="number"
                           step="0.01"
                           value={item.retailPrice}
                           onChange={e => handleUpdateLine(idx, 'retailPrice', parseFloat(e.target.value) || 0)}
-                          className="w-20 rounded-lg border border-slate-300 px-2 py-1 text-right font-mono font-bold text-emerald-600 dark:border-slate-700 dark:bg-slate-800 dark:text-emerald-400"
+                          className="w-20 rounded-xl border border-slate-200 bg-slate-50/70 px-2 py-1.5 text-right font-mono font-bold text-emerald-600 dark:border-slate-700 dark:bg-slate-800 dark:text-emerald-400"
                         />
                       </td>
-                      <td className="py-2 px-3 text-right font-mono font-bold text-slate-900 dark:text-white">
+                      <td className="py-2.5 px-3 text-right font-mono font-bold text-slate-900 dark:text-white">
                         {formatCurrency(item.totalCost)}
                       </td>
-                      <td className="py-2 px-3 text-center">
+                      <td className="py-2.5 px-3 text-center">
                         <button
                           type="button"
                           onClick={() => handleRemoveLine(idx)}
                           disabled={items.length === 1}
-                          className="text-rose-500 hover:text-rose-700 disabled:opacity-30"
+                          className="p-1 text-rose-500 hover:text-rose-700 disabled:opacity-20 cursor-pointer"
                         >
                           <Trash2 className="h-4 w-4 mx-auto" />
                         </button>
@@ -317,15 +319,15 @@ export const PurchasesView: React.FC = () => {
           </div>
 
           {/* Totals & Submit */}
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 border-t border-slate-200 pt-4 dark:border-slate-800">
-            <div className="flex items-center gap-4">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 border-t border-slate-100 pt-4 dark:border-slate-800">
+            <div className="flex items-center gap-6">
               <div>
-                <span className="text-slate-500 font-semibold">Total Order Cost:</span>
-                <p className="text-lg font-black text-slate-900 dark:text-white">{formatCurrency(totalAmount)}</p>
+                <span className="text-slate-500 text-[11px] font-semibold">Total Order Cost:</span>
+                <p className="text-xl font-black text-slate-900 dark:text-white">{formatCurrency(totalAmount)}</p>
               </div>
 
               <div>
-                <span className="text-slate-500 font-semibold">Paid Amount (Rs):</span>
+                <span className="text-slate-500 text-[11px] font-semibold">Paid Amount (Rs):</span>
                 <input
                   type="number"
                   value={paidAmount}
@@ -336,22 +338,22 @@ export const PurchasesView: React.FC = () => {
                     else if (amt > 0) setPaymentStatus('PARTIAL');
                     else setPaymentStatus('UNPAID');
                   }}
-                  className="w-28 rounded-xl border border-slate-300 px-3 py-1.5 font-bold font-mono dark:border-slate-700 dark:bg-slate-800 dark:text-white"
+                  className="w-32 rounded-2xl border border-slate-200 bg-slate-50/70 px-3 py-2 font-bold font-mono dark:border-slate-700 dark:bg-slate-800 dark:text-white focus:border-emerald-500 focus:outline-none"
                 />
               </div>
             </div>
 
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2.5">
               <button
                 type="button"
                 onClick={() => setActiveTabMode('history')}
-                className="rounded-xl px-4 py-2.5 font-semibold text-slate-600 hover:bg-slate-100 dark:hover:bg-slate-800"
+                className="rounded-2xl px-4 py-2.5 font-semibold text-slate-600 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
               >
                 Cancel
               </button>
               <button
                 type="submit"
-                className="rounded-xl bg-emerald-600 px-6 py-2.5 font-bold text-white shadow-md hover:bg-emerald-500"
+                className="rounded-2xl bg-emerald-600 px-6 py-2.5 font-bold text-white shadow-md shadow-emerald-600/20 hover:bg-emerald-500 transition-colors cursor-pointer"
               >
                 Save & Update Inventory Stock
               </button>
@@ -360,11 +362,11 @@ export const PurchasesView: React.FC = () => {
         </form>
       ) : (
         /* Purchases History Table */
-        <div className="rounded-3xl border border-slate-200 bg-white shadow-sm overflow-hidden dark:border-slate-800 dark:bg-slate-900">
+        <div className="rounded-3xl border border-slate-200/80 bg-white shadow-xs overflow-hidden dark:border-slate-800/80 dark:bg-slate-900">
           <div className="overflow-x-auto">
             <table className="w-full text-left text-xs">
               <thead>
-                <tr className="border-b border-slate-200 bg-slate-50/70 text-slate-500 dark:border-slate-800 dark:bg-slate-800/40">
+                <tr className="border-b border-slate-100 bg-slate-50/70 text-slate-500 dark:border-slate-800 dark:bg-slate-800/40">
                   <th className="py-3.5 px-4 font-bold uppercase tracking-wider text-[10px]">PO #</th>
                   <th className="py-3.5 px-3 font-bold uppercase tracking-wider text-[10px]">Date & Time</th>
                   <th className="py-3.5 px-3 font-bold uppercase tracking-wider text-[10px]">Supplier Distributor</th>
@@ -375,25 +377,33 @@ export const PurchasesView: React.FC = () => {
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
-                {purchases.map(p => (
-                  <tr key={p.id} className="hover:bg-slate-50/70 dark:hover:bg-slate-800/40 transition-colors">
-                    <td className="py-3.5 px-4 font-mono font-bold text-slate-900 dark:text-white">{p.purchaseNumber}</td>
-                    <td className="py-3.5 px-3 text-slate-600 dark:text-slate-300">{formatDateTime(p.timestamp)}</td>
-                    <td className="py-3.5 px-3 font-bold">{p.supplierName}</td>
-                    <td className="py-3.5 px-3 font-mono text-indigo-600">{p.supplierInvoiceNumber}</td>
-                    <td className="py-3.5 px-3">
-                      {p.items.map(i => `${i.medicineName} (${i.quantity})`).join(', ')}
-                    </td>
-                    <td className="py-3.5 px-3">
-                      <span className="inline-block rounded-lg bg-emerald-100 px-2 py-0.5 text-[10px] font-bold uppercase text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300">
-                        {p.paymentStatus}
-                      </span>
-                    </td>
-                    <td className="py-3.5 px-4 text-right font-mono font-black text-slate-900 dark:text-white">
-                      {formatCurrency(p.totalAmount)}
+                {purchases.length === 0 ? (
+                  <tr>
+                    <td colSpan={7} className="py-14 text-center text-slate-400">
+                      <p className="font-bold text-sm text-slate-700 dark:text-slate-200">No purchase orders recorded yet</p>
                     </td>
                   </tr>
-                ))}
+                ) : (
+                  purchases.map(p => (
+                    <tr key={p.id} className="hover:bg-slate-50/80 dark:hover:bg-slate-800/40 transition-colors">
+                      <td className="py-3.5 px-4 font-mono font-bold text-slate-900 dark:text-white">{p.purchaseNumber}</td>
+                      <td className="py-3.5 px-3 text-slate-600 dark:text-slate-300">{formatDateTime(p.timestamp)}</td>
+                      <td className="py-3.5 px-3 font-bold text-slate-900 dark:text-white">{p.supplierName}</td>
+                      <td className="py-3.5 px-3 font-mono text-emerald-600 font-semibold">{p.supplierInvoiceNumber}</td>
+                      <td className="py-3.5 px-3">
+                        {p.items.map(i => `${i.medicineName} (${i.quantity})`).join(', ')}
+                      </td>
+                      <td className="py-3.5 px-3">
+                        <span className="inline-block rounded-lg bg-emerald-50 px-2.5 py-0.5 text-[10px] font-bold uppercase text-emerald-700 dark:bg-emerald-950/60 dark:text-emerald-300">
+                          {p.paymentStatus}
+                        </span>
+                      </td>
+                      <td className="py-3.5 px-4 text-right font-mono font-black text-slate-900 dark:text-white text-sm">
+                        {formatCurrency(p.totalAmount)}
+                      </td>
+                    </tr>
+                  ))
+                )}
               </tbody>
             </table>
           </div>
